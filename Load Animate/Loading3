@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .con {
+            width: 100px;
+            height: 22px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .loding-div {
+            width: 100px;
+            height: 20px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: flex;
+            justify-content:space-around;
+        }
+            .lod {
+                width: 2px;
+                height: 20px;
+                animation: ani alternate-reverse 2s infinite;
+                transform-origin:bottom;
+            }
+                .lod:nth-child(1) {
+                    background: red;
+                    animation-delay:0;
+                }
+                .lod:nth-child(2) {
+                    background: orange;
+                    animation-delay: 0.2s;
+                }
+                .lod:nth-child(3) {
+                    background: yellow;
+                    animation-delay: 0.4s;
+                }
+                .lod:nth-child(4) {
+                    background: green;
+                    animation-delay: 0.6s;
+                }
+                .lod:nth-child(5) {
+                    background: blue;
+                    animation-delay: 0.8s;
+                }
+        .but {
+            width: 0px;
+            height: 2px;
+            background: black;
+            margin:auto;
+            animation: but alternate-reverse 2s infinite;
+            
+        }
+        @keyframes but {
+            0% {
+            width:0px;
+            }
+            100% {
+            width:82px;
+            }
+        }
+        @keyframes ani {
+            0% {
+            transform:rotate(90deg);
+            }
+            
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <div class="loding-div">
+            <div class="lod"></div>
+            <div class="lod"></div>
+            <div class="lod"></div>
+            <div class="lod"></div>
+            <div class="lod"></div>
+        </div>
+        <div class="but"></div>
+    </div>
+</body>
+</html>
