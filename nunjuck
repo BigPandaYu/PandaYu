@@ -1,4 +1,5 @@
-//配置nunjucks，path存放模板的目录，opts某些功能开启或关闭
+//代码来源于廖雪峰官网
+//node中配置nunjucks，path存放模板的目录，opts某些功能开启或关闭
 function createEnv(path, opts) {
     //是否被转义
     var autoescape = opts.autoescape == undefined ? true : opts.autoescape;
