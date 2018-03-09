@@ -1,0 +1,48 @@
+//代码来源于廖雪峰官网
+//node中配置nunjucks，path存放模板的目录，opts某些功能开启或关闭
+function createEnv(path, opts) {
+    //是否被转义
+    var autoescape = opts.autoescape == undefined ? true : opts.autoescape;
+    //不使用缓存，每次都重新编译
+    var noCache = opts.noCache || false;
+    //当模板变化时重新加载。使用前请确保已安装可选依赖 chokidar。
+    var watch = opts.watch || false;
+    //当输出为 null 或 undefined 会抛出异常
+    var throwOnUndefined = opts.throwOnUndefined || false;
+    //使用nunjuck的三步
+    //1.实例化Environment对象，即创建env对象
+    //Environment 类用来管理模板，使用他可以加载模板，模板之间可以继承和包含
+    var env = new nunjucks.Environment(
+        //在node端使用new FileSystemLoader([searchPaths],[opt]) 加载[loaders]，
+        //searchPaths为模板所在路径，一般为views，
+        //opts包含noCache 和watch
+        new nunjucks.FileSystemLoader(path, {
+            noCache: noCache,
+            watch: watch
+        }), {
+            autoescape: autoescape,
+            throwOnUndefined: throwOnUndefined
+        }
+    );
+    //自定义过滤器
+    if (opts.filters) {
+        for (var f in opts.filters) {
+            //如果一个对象的属性名存储在变量中，通过object[var] 方式遍历
+            env.addFilter(f, opts.filters[f]);
+        }
+    }
+    return env;
+}
+//实例化env
+
+var env = createEnv('views', {
+    watch: true,
+    filters: {
+        hex: function(n) {
+            return '0x' + n.toString(16);
+        }
+    }
+});
+
+//2.模板HTML文件，通常放在views文件夹下面
+//3.{varName:Data...}数据
